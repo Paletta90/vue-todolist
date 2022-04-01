@@ -1,3 +1,6 @@
 .bg-todo{
     background-color: antiquewhite;
 }
+.done_todo{
+    text-decoration: line-through;
+}

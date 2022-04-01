@@ -29,19 +29,39 @@
 
                 <!-- Blocco input e button -->
                 <div class="d-flex">
-                    <input type="text" class="form-control me-3" placeholder="Inserisci una nuova todo">
-                    <button type="button" class="btn btn-warning">Warning</button>
+
+                    <input type="text" 
+                           class="form-control me-3" 
+                           placeholder="Inserisci una nuova todo"
+                           v-model="todoText"
+                    >
+                    
+                    <button type="button" class="btn btn-warning" @click="printTodo(todoText)">Warning</button>
                 </div>
 
                 <!-- Blocco cose da fare todo -->
                 <div class="bg-todo my-5">
 
-                    <ul class="list-group p-3">
+                    <!-- Se non ci sono cose da fare stampo il titolo -->
+                    <h2 class="text-center py-3" v-if="arrayTodo.length == 0">Cose da fare vuoto</h2>
+
+                    <!-- Liste di cose da fare -->
+                    <ul v-else 
+                    class="list-group p-3">
+
                         <li class="list-group-item d-flex justify-content-between align-items-center bg-white mb-3"
-                            v-for="elem in arrayTodo"
+                            v-for="(elem, index) in arrayTodo"
                         >
-                            <span>{{elem.textTodo}}</span>
-                            <i class="fa-solid fa-circle-xmark text-danger"></i>
+
+                            <!-- Testo del singolo todo -->
+                            <span :class=" (elem.done == true) ? 'done_todo' : '' "
+                                 @click="doneTodo(index)" >{{elem.textTodo}}</span>
+                            <!-- Icona per cancellare -->
+                            <i class="fa-solid fa-circle-xmark text-danger"
+                               role="button"
+                               @click="deleteTodo(index)"
+                            ></i>
+
                         </li>
                     </ul>
 
