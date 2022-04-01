@@ -34,6 +34,7 @@
                            class="form-control me-3" 
                            placeholder="Inserisci una nuova todo"
                            v-model="todoText"
+                           @keyup.enter="printTodo(todoText)"
                     >
                     
                     <button type="button" class="btn btn-warning" @click="printTodo(todoText)">Warning</button>
@@ -56,6 +57,7 @@
 
                             <!-- Testo del singolo todo -->
                             <span :class=" (elem.done == true) ? 'done_todo' : '' "
+                                 role="button"
                                  @click="doneTodo(index)" >{{elem.textTodo}}</span>
                             <!-- Icona per cancellare -->
                             <i class="fa-solid fa-circle-xmark text-danger"
